@@ -17,6 +17,10 @@ for (let n = 0; n<pricesAndQtyinStr.length; n++) {
     else {
         let priceStr = [...pricesAndQtyinStr[n]]
         priceStr.shift()
+        let comma = priceStr.indexOf(",")
+        if (comma === 1) {
+            priceStr.splice(comma, 1)
+        }
         let joinedPrice = priceStr.join('')
         price.push(parseInt(joinedPrice))
     }
