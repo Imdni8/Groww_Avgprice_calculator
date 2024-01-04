@@ -1,3 +1,6 @@
+//Rules for using
+//no stock split
+
 //produces array of prices and quantities
 let allData = document.querySelectorAll(".ord131DescLine1")
 allData = Array.from(allData)
@@ -34,22 +37,20 @@ for (let n = 0; n<buyOrSellFiltered.length; n++) {
 
 console.log("Buy/sell array: " + buyOrSellTags)
 
-//calculating prices for both buy and sell orders
-const transactionAmtArr = [] //
-for (let i = 0; i < price.length; i++) {
-    transactionAmtArr.push(price[i] * qty[i])
+//calculating prices for buy orders
+const buyAmtArr = [] //
+for (let i = 0; i < price.length && qty.length; i++) {
+    if (buyOrSellTags[i] === 'Buy') {
+        buyAmtArr.push(price[i] * qty[i])
+    }
 }
 
-console.log("Transactions: " + transactionAmtArr)
+console.log("Transactions: " + buyAmtArr)
 
 //finding net buy amount
 let netBuyPrice = 0
-for (let i = 0; i < transactionAmtArr.length && buyOrSellTags.length; i++) {
-    if (buyOrSellTags[i] === 'Buy') {
-        netBuyPrice += price[i] * qty[i]
-    } else {
-        netBuyPrice -= price[i] * qty[i]
-    }
+for (let i = 0; i < buyAmtArr.length; i++) {
+    netBuyPrice += buyAmtArr[i]
 }
 
 console.log("Net buy price: " + netBuyPrice)
